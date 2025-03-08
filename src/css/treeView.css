@@ -1,0 +1,76 @@
+.treeContainer {
+  font-size: smaller;
+}
+
+.nodeLabel {
+  line-height: 2em;
+}
+
+.titleLabel {
+  vertical-align: middle
+}
+
+.node-group-icon {
+  vertical-align: middle;
+  color: grey;
+  cursor: default;
+}
+
+.nodeLabel:hover {
+  background-color: #eee;
+}
+
+.nodeLabel .oprationButtons {
+  display: none;
+}
+
+.nodeLabel:hover .oprationButtons {
+  display: inline;
+}
+
+.nodeLabel:focus {
+  background-color: #def;
+}
+
+.oprationButtons {
+  float: right;
+  padding-right: 8px;
+}
+
+.operation-button {
+  vertical-align: middle;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.operation-button:hover {
+  color: #00a0ea;
+}
+
+.subNodes {
+  padding-left: 1.5em
+}
+
+.iconPlaceHolder {
+  width: 1em;
+  height: 1em;
+  display: inline-block
+}
+
+.expandCollapseIcon {
+  width: 1em;
+  vertical-align: middle;
+  cursor: pointer
+}
+
+.expandCollapseIcon.expanded {
+  transform: rotateZ(90deg)
+}
+
+.nodeCheckbox {
+  vertical-align: middle;
+  margin-left: -.25em;
+  margin-right: -.5em;
+  margin-top: -.25em;
+  margin-bottom: -.25em
+}

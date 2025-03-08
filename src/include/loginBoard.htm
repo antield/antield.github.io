@@ -1,0 +1,24 @@
+<div id="loginBoard" class="loginBoard" style="display:none;">
+  <form class="loginForm" action="javascript:;">
+    <h4 class="loginFormTitle"><span class="material-icons" style="margin-right:0.25em;vertical-align:middle;">account_circle</span>系统登录</h4>
+    <div class="inputRow">
+      <md-outlined-text-field id="username" name="username" label="用户名" class="inputElement" required></md-outlined-text-field>
+    </div>
+    <div class="inputRow">
+      <md-outlined-text-field type="password" id="password" name="password" class="inputElement" label="密码" required></md-outlined-text-field>
+    </div>
+    <div class="loginResultTip"></div>
+    <div class="loginSubmitRow">
+      <input id="loginSubmitButton" type="submit" value="登录" class="submitButton inputElement" />
+    </div>
+  </form>
+</div>
+
+<div id="loginedInfoBar" style="display:none;">
+  <span class="welcomeWords">欢迎您！</span>
+  <span class="nickname"></span>
+  <a href="javascript:;" class="logoutAnchor">退出</a>
+</div>
+<div id="needLoginInfoBar">
+  <a href="javascript:;" class="loginAnchor">登录</a>
+</div>

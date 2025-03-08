@@ -1,0 +1,16 @@
+.PaginationSpan {
+  user-select: none;
+}
+
+.PaginationSpan>a {
+  margin-right: 0.5em;
+  padding: 0.5em;
+}
+
+.PaginationSpan>a:hover {
+  background-color: #eee;
+}
+
+.PaginationSpan>a.current {
+  font-weight: bold;
+}

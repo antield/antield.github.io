@@ -1,0 +1,332 @@
+:root {
+  /* --md-outlined-text-field-container-shape: 0px; */
+  /* --md-sys-typescale-body-large: 400 1rem system-ui; */
+  --md-sys-color-primary: #1875e7;
+  /* --md-outlined-text-field-label-text-color: #3f4948; */
+  /* --md-outlined-text-field-input-text-color: #161d1d; */
+}
+
+md-outlined-text-field {
+  --md-outlined-field-focus-outline-width: 1px;
+}
+
+.ol-zoom {
+  top: auto !important;
+  bottom: 0.5em !important;
+}
+
+html {
+  height: 100%;
+  font-family: "Source Han Sans SC", Roboto, "Helvetica Neue", "Microsoft YaHei", SimHei, NSimSun, SimSun, sans-serif;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
+
+#headerLeft {
+  float: left;
+}
+
+#headerRight {
+  float: right;
+}
+
+.bottomLine {
+  clear: both;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+#mapCurtain {
+  height: 100%;
+}
+
+#mapOuter {
+  box-sizing: border-box;
+  /* padding-right: 240px; */
+  height: 100%;
+  /* position: relative; */
+}
+
+.tabPageBody {
+  font-size: 14px;
+}
+
+.contentMain table {
+  width: 100%;
+}
+
+.contentMain :has(>:required)::after {
+  content: '*';
+  color: red;
+  margin-left: 0.5em;
+}
+
+table.contentTable td {
+  padding: 8px;
+}
+
+table.contentTable tr:nth-child(2n+1) {
+  background-color: #eee;
+}
+
+table.contentTable tr td:first-child {
+  vertical-align: top;
+  width: 240px;
+}
+
+table.contentTable input[type='text'],
+table.contentTable input[type='number'],
+table.contentTable select {
+  height: 32px;
+  width: 400px;
+  box-sizing: border-box;
+}
+
+table.contentTable textarea {
+  width: 400px;
+  box-sizing: border-box;
+}
+
+table.contentTable input:invalid,
+table.contentTable textarea:invalid,
+table.contentTable select:invalid {
+  border: 1px solid orange;
+  outline: 1px solid orange;
+}
+
+.contentMain img {
+  border: 1px solid #aaa;
+  padding: 7px;
+  background-color: #eee;
+  vertical-align: bottom;
+}
+
+img.iconImagePreview {
+  max-width: 120px;
+  max-height: 120px;
+}
+
+#olMap {
+  width: 100%;
+  height: 100%;
+}
+
+#rightBar {
+  position: absolute;
+  right: 0;
+  width: 240px;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+}
+
+.sideBarInner {
+  padding: 0.5em;
+}
+
+.sideBarInner h4 {
+  margin: 0;
+}
+
+.panelBody a {
+  text-decoration: none;
+}
+
+.itemLabel {
+  color: #808080;
+  margin-right: 0.5em;
+}
+
+.panelBody .detailImages {
+  margin-top: 0.5em;
+}
+
+.detailImages a {
+  margin: 4px;
+}
+
+.detailImages .imgBox {
+  display: inline-block;
+  width: 160px;
+  height: 120px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #ddd;
+}
+
+.detailImages .imgBox>img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#tinyPanelOverlay {
+  width: 240px;
+}
+
+.tinyPanelBody {
+  background-color: #fff;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #808080;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.tinyPaneCloseButton {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: SimSun, serif, monospace;
+  line-height: 1;
+}
+
+.tinyPaneCloseButton:hover {
+  font-weight: bold;
+}
+
+.tinyPanelFoot {
+  margin-top: -1px;
+  height: 21px;
+  background: url(../images/overlay/popup_foot_tiny.png) 60px 0 no-repeat;
+}
+
+.tinyPanelBody .detailImages .imgBox {
+  width: 100px;
+  height: 75px;
+}
+
+.tinyPanelBody table {
+  border-collapse: collapse;
+}
+
+.tinyPanelBody td:first-child {
+  text-align: right;
+  width: 72px;
+  vertical-align: top;
+}
+
+.plainButton {
+  background-color: rgb(0, 160, 234);
+  color: white;
+  border-radius: 3px;
+  border-width: 0;
+  font-size: 14px;
+  padding: 4px 8px;
+}
+
+.plainButtonBig {
+  background-color: #00a0ea;
+  color: #fff;
+  border-radius: 3px;
+  border-width: 0;
+  font-size: 16px;
+  padding: 5px 12px;
+  vertical-align: middle;
+}
+
+.overflowEllipsis72 {
+  width: 72px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.panelContainer {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.leftPanel {
+  width: 30%;
+  height: 100%;
+  float: left;
+}
+
+.centerPanel {
+  width: 40%;
+  height: 100%;
+  float: left;
+}
+
+.rightPanel {
+  width: 30%;
+  height: 100%;
+  float: left;
+}
+
+.panel-33 {
+  width: 100%;
+  height: 33%;
+}
+
+.panel-34 {
+  width: 100%;
+  height: 33%;
+}
+
+.panel-80 {
+  height: 80%;
+}
+
+.panel-20 {
+  height: 20%;
+}
+
+.panel-50 {
+  height: 50%;
+}
+
+.submitButtonLine {
+  margin: 1em 0;
+}
+
+.submitButtonLine input[type="submit"] {
+  background-color: #108ee9;
+  color: #fff;
+  width: 140px;
+  height: 36px;
+  border-radius: 4px;
+  border: none;
+  margin-right: 2em;
+  cursor: pointer;
+}
+
+.submitButtonLine input[type="button"],
+.submitButtonLine input[type="reset"] {
+  background-color: #f3f3f3;
+  color: #666666;
+  width: 140px;
+  height: 36px;
+  border-radius: 4px;
+  border: solid 1px #d9d9d9;
+  margin-right: 2em;
+  cursor: pointer;
+}
+
+.detailGoBackButton {
+  background-color: #f3f3f3;
+  color: #666666;
+  width: 140px;
+  height: 36px;
+  border-radius: 4px;
+  border: solid 1px #d9d9d9;
+  margin-right: 2em;
+  cursor: pointer;
+}

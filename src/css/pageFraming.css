@@ -1,0 +1,77 @@
+body {
+  background-color: #f3f4f6;
+}
+
+#navigator {
+  position: absolute;
+  left: 0;
+  width: 180px;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  color: white;
+  background-color: rgb(0, 160, 234);
+}
+
+#navigator a {
+  display: block;
+  background-repeat: no-repeat;
+  background-position: 16px 50%;
+  line-height: 2.5;
+  color: white;
+  padding-left: 48px;
+}
+
+#navigator>ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#navigator li {
+  margin: 6px 0;
+  background-image: url(../images/navi_icon/goArrow.png);
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+#navigator li:hover {
+  background-color: rgb(0, 146, 213);
+}
+
+#navigator li.active {
+  background-color: rgb(0, 132, 192);
+}
+
+#breadcrumb {
+  position: absolute;
+  left: 180px;
+  top: 0;
+  right: 0;
+  height: 60px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+#breadcrumbInner {
+  padding: 16px;
+}
+
+#breadcrumbInner>* {
+  vertical-align: middle;
+}
+
+#breadcrumb a {
+  color: #00a0ea;
+}
+
+#breadcrumb .breadcrumbItem {}
+
+#mainBody {
+  position: absolute;
+  background-color: transparent;
+  top: 76px;
+  left: 196px;
+  right: 16px;
+  bottom: 16px;
+}

@@ -1,0 +1,49 @@
+.loginBoard {
+  line-height: 2;
+  padding: 2em 3em;
+  background-color: white;
+}
+
+.loginFormTitle {
+  margin: 0 0 1em 0;
+  text-align: center;
+  color: #666;
+}
+
+.loginResultTip {
+  color: #a00;
+}
+
+#loginedInfoBar, #needLoginInfoBar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5em 1em;
+}
+
+.inputRow {
+  padding: 0.5em 0;
+}
+
+.inputElement {
+  width: 260px;
+}
+
+.loginSubmitRow {
+  text-align: center;
+  margin-top: 0em;
+  margin-bottom: 1.5em;
+}
+
+.submitButton {
+  background-color: rgb(0, 160, 234);
+  color: white;
+  border-radius: 5px;
+  border-width: 0;
+  font-size: 14px;
+  padding: 6px 32px;
+  font-family: '思源黑体', 'Microsoft YaHei', monospace;
+  vertical-align: middle;
+  height: 36px;
+  margin-top: 18px;
+}

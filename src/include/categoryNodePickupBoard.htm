@@ -1,0 +1,29 @@
+<div id="categoryNodePickupBoard" class="pickupBoard" style="display: none;">
+  <div class="pickupBoardInner">
+    <div class="closeBoardButton" title="关闭">×</div>
+    <div class="boardTitleBox">
+      <h4 class="boardTitle">选择父类别</h4>
+    </div>
+    <div class="pickupBoardBody treeContainer"></div>
+    <div class="pickupBoardFooter">
+      <div class="resultRow">
+        <span>选中结果：</span>
+        <span class="pickupNodeResult"></span>
+      </div>
+      <div class="submitRow">
+        <input type="submit" value="提交" class="plainButton" />
+        <input type="button" value="取消" class="plainButton" />
+      </div>
+    </div>
+  </div>
+</div>
+<template id="groupTreeNodePickupItem">
+  <div class="treeNodeItem" data-node-type="group">
+    <div class="nodeLabel {selected?current:}" data-id="{id}" data-title="{title}">
+      <img src="images/page_content/caret-forward-outline.svg" class="expandCollapseIcon {expanded?expanded:collapsed}" alt="expand collapse icon">
+      <span class="material-icons node-group-icon" style="">folder</span>
+      <label class="titleLabel">{title}</label>
+    </div>
+    <div class="subNodes" style="{expanded:display-block}"></div>
+  </div>
+</template>

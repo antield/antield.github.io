@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <title>熙攘心声馆</title>
+  <link rel="stylesheet" href="css/lib/iconfont/material-icons.css" type="text/css">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <link rel="stylesheet" href="css/pageFraming.css" type="text/css">
+  <link rel="stylesheet" href="css/pageSwitcher.css" type="text/css">
+  <link rel="stylesheet" href="css/loginBoard.css" type="text/css">
+</head>
+
+<body>
+  <header>
+    <div id="headerLeft">
+      <div id="logo">
+        熙攘心声馆
+      </div>
+      <%include('src/include/navigator.htm',{"activePage":"category"})%>
+    </div>
+    <div id="headerRight">
+      <div id="searchBox"></div>
+      <div id="memberBox"></div>
+    </div>
+    <div class="bottomLine"></div>
+  </header>
+  <div id="breadcrumb">
+    <div id="breadcrumbInner">
+      <span class="material-icons">home</span>
+      <span>兴趣点管理</span>
+      <span class="material-icons">navigate_next</span>
+      <a class="breadcrumbItem" href="category.html">类别管理</a>
+    </div>
+  </div>
+  <div id="mainBody">
+    <!-- @@content -->
+  </div>
+  <%include('src/include/loginBoard.htm')%>
+    <script type="text/javascript" src="js/compile-less/map_config.js"></script>
+</body>
+
+</html>
