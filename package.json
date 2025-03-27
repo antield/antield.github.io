@@ -1,8 +1,8 @@
 {
-  "name": "antield.github.io",
+  "name": "yunjiang.xin",
   "port": 9602,
   "host": "localhost",
-  "htmlIndex": "category.html",
+  "htmlIndex": "index.html",
   "version": "0.0.1",
   "description": "",
   "private": true,

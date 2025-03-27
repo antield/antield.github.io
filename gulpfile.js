@@ -10,20 +10,20 @@ import path from 'path';
 import named from 'vinyl-named';
 import through2 from 'through2';
 import fs from 'fs';
+import Webpack_Config_Prod from './webpack.prod.js';
+import Webpack_Config_Dev from './webpack.dev.js';
 
 const pkg = {
-  "name": "antield.github.io",
+  "name": "yunjiang.xin",
   "port": 9602,
   "host": "localhost",
-  "htmlIndex": "category.html"
+  "htmlIndex": "index.html"
 };
 const STRAT_PAGE = "http://" + pkg.host + ":" + pkg.port + "/" + pkg.htmlIndex;
 
 const Dist_Prod = 'build/' + pkg.name;
 const Dist_Dev = 'build/dev';
 var Dist = Dist_Dev;
-const Webpack_Config_Prod = './webpack.prod.js';
-const Webpack_Config_Dev = './webpack.dev.js';
 var Webpack_Config = Webpack_Config_Dev;
 
 function watch_task(cb) {
@@ -42,7 +42,25 @@ function web_server() {
     port: pkg.port,
     host: pkg.host,
     livereload: true,
-    open: STRAT_PAGE
+    open: STRAT_PAGE,
+    middleware: [
+      function (req, res, next) {
+        const url = req.url;
+        console.log("url: " + url);
+
+        // 检查请求的 URL 是否以 .woff 或 .woff2 结尾
+        if (url.endsWith('.woff')) {
+          res.setHeader('Content-Type', 'font/woff');
+          res.setHeader('Content-Encoding', 'identity');
+        } else if (url.endsWith('.woff2')) {
+          res.setHeader('Content-Type', 'font/woff2');
+          res.setHeader('Content-Encoding', 'identity');
+        }
+
+        // 继续处理其他请求
+        next();
+      }
+    ]
   }));
 }
 
@@ -87,7 +105,7 @@ function copy_html() {
     }).pipe(dest(Dist));
 }
 
-async function compile_js() {
+function compile_js() {
   return src('src/js/main/**/*.js')
     .pipe(named(function (file) {
       let fileRelative = file.relative;
@@ -96,7 +114,7 @@ async function compile_js() {
       return relativePathAndStem;
     }))
     .pipe(gulpWebpack({
-      config: await import(Webpack_Config)
+      config: Webpack_Config
     }, webpack))
     .pipe(dest(Dist + '/js'));
 }
@@ -114,11 +132,11 @@ export function copy_css() {
 }
 
 function copy_css_lib() {
-  return src('src/css/lib/**').pipe(dest(Dist + '/css/lib'));
+  return src('src/css/lib/**', { encoding: false }).pipe(dest(Dist + '/css/lib'));
 }
 
 export function copy_images() {
-  return src('src/images/**').pipe(dest(Dist + '/images'));
+  return src('src/images/**', { encoding: false }).pipe(dest(Dist + '/images'));
 }
 
 var copy_sources = parallel(copy_css, copy_css_lib, copy_js_lib, copy_js_compile_less, copy_html, copy_opus, copy_images);
