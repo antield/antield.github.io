@@ -12,6 +12,7 @@ import through2 from 'through2';
 import fs from 'fs';
 import Webpack_Config_Prod from './webpack.prod.js';
 import Webpack_Config_Dev from './webpack.dev.js';
+import ghpages from 'gh-pages';
 
 const pkg = {
   "name": "yunjiang.xin",
@@ -156,5 +157,16 @@ function changeToProd(cb) {
 }
 
 export const build = series(changeToProd, clean_task, copy_sources, compile_js);
+
+export const gh_deploy = function (cb) {
+  ghpages.publish('build/yunjiang.xin/',
+    {
+      repo: 'https://github.com/antield/antield.github.io.git'
+    },
+    function (err) {
+      console.error("gh_deploy error", err);
+      cb();
+    });
+};
 
 export default start;

@@ -19,6 +19,7 @@
   "devDependencies": {
     "css-loader": "^6.8.1",
     "file-loader": "^6.2.0",
+    "gh-pages": "^6.3.0",
     "gulp": "^5.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.2.0",
