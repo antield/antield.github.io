@@ -161,7 +161,8 @@ export const build = series(changeToProd, clean_task, copy_sources, compile_js);
 export const gh_deploy = function (cb) {
   ghpages.publish('build/yunjiang.xin/',
     function (err) {
-      console.error("gh_deploy error", err);
+      if (err != null)
+        console.error("gh_deploy error", err);
       cb();
     });
 };
