@@ -140,6 +140,10 @@ export function copy_images() {
   return src('src/images/**', { encoding: false }).pipe(dest(Dist + '/images'));
 }
 
+export function copy_deploy() {
+  return src('src/deploy/**', { encoding: false }).pipe(dest(Dist));
+}
+
 var copy_sources = parallel(copy_css, copy_css_lib, copy_js_lib, copy_js_compile_less, copy_html, copy_opus, copy_images);
 
 export function clean_task() {
@@ -156,21 +160,16 @@ function changeToProd(cb) {
   cb();
 }
 
-export const build = series(changeToProd, clean_task, copy_sources, compile_js);
+export const build = series(changeToProd, clean_task, copy_sources, copy_deploy, compile_js);
 
-export const gh_deploy = function (cb) {
-  src("src/deploy/CNAME")
-    .pipe(dest(Dist_Prod))
-    .on('end', () => {
-      ghpages.publish(Dist_Prod,
-        function (err) {
-          if (err != null)
-            console.error("gh_deploy error", err);
-          cb();
-        }
-      );
-    })
-    .on('error', cb);
+export const gh_deploy = (cb) => {
+  ghpages.publish(Dist_Prod, (err) => {
+    if (err) {
+      console.error("gh_deploy error", err);
+      return cb(err);
+    }
+    cb(null);
+  });
 };
 
 export default start;
