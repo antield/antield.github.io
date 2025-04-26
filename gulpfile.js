@@ -159,14 +159,18 @@ function changeToProd(cb) {
 export const build = series(changeToProd, clean_task, copy_sources, compile_js);
 
 export const gh_deploy = function (cb) {
-  src("src/deploy/CNAME").pipe(dest(Dist_Prod));
-  ghpages.publish(Dist_Prod,
-    function (err) {
-      if (err != null)
-        console.error("gh_deploy error", err);
-      cb();
-    }
-  );
+  src("src/deploy/CNAME")
+    .pipe(dest(Dist_Prod))
+    .on('end', () => {
+      ghpages.publish(Dist_Prod,
+        function (err) {
+          if (err != null)
+            console.error("gh_deploy error", err);
+          cb();
+        }
+      );
+    })
+    .on('error', cb);
 };
 
 export default start;
