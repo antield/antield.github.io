@@ -204,7 +204,7 @@ export function replaceTemplateWithObject(template, obj) {
  * @return {HTMLDialogElement}             对话框对象
  */
 export function showMessageTip(messageHtml) {
-  messageHtml = "<span class=\"material-icons md-info\" style=\"color:blue;margin-right:1em;vertical-align:middle;\"></span>" + messageHtml;
+  messageHtml = "<span class=\"material-symbols-outlined\" style=\"color:blue;margin-right:1em;vertical-align:middle;font-variation-settings:'FILL' 1;\">info</span>" + messageHtml;
   let dialog = showMessageDialog(messageHtml, true, true);
   dialog.blur();
   return dialog;
