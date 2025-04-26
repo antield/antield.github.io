@@ -4,21 +4,41 @@
 <head>
   <meta charset="utf-8">
   <title>云匠心</title>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
-  <!-- <link rel="stylesheet" href="css/style.css" type="text/css"> -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
   <link rel="stylesheet" href="css/loginBoard.css" type="text/css">
 </head>
 
 <body>
-  <div id="breadcrumb">
-    <div id="breadcrumbInner" style="font-variation-settings: 'FILL' 1">
-      <span class="material-symbols-outlined">home</span>
+  <div id="mainBody">
+    <div id="indexMainBody">
+      <header>
+        <h1>云匠心</h1>
+      </header>
+      <div id="indexNav">
+        <ul>
+          <li>
+            <a href="theory/">基础理论</a>
+          </li>
+          <li>
+            <a href="technic/">实操技能</a>
+          </li>
+          <li>
+            <a href="insight/">内观</a>
+          </li>
+          <li>
+            <a href="practice/">探索</a>
+          </li>
+          <li>
+            <a href="about.html">关于</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-  <%include('../include/navigator.htm',{"activePage":null})%>
-  <div id="mainBody">
-  </div>
-  <%include('../include/loginBoard.htm')%>
+  <!--%include('../include/loginBoard.htm')%-->
   <script type="text/javascript" src="js/compile-less/map_config.js"></script>
   <script type="text/javascript" src="js/index.bundle.js"></script>
 </body>

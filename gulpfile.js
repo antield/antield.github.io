@@ -83,8 +83,8 @@ function copy_opus() {
     .pipe(markdown())
     .pipe(injectContent('src/template/md-item.htm'))
     .pipe(FileInclude({
-      prefix: '<%',
-      suffix: '%>',
+      prefix: '<!--%',
+      suffix: '%-->',
       basepath: '@root'
     }))
     .pipe(dest(Dist))
@@ -97,8 +97,8 @@ function copy_opus() {
 function copy_html() {
   return src('src/view/**/*.html')
     .pipe(FileInclude({
-      prefix: '<%',
-      suffix: '%>',
+      prefix: '<!--%',
+      suffix: '%-->',
       basepath: '@file'
     })).on('error', function (err) {
       console.error('Task:copy-html,', err.message);

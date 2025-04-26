@@ -17,7 +17,7 @@ md-outlined-text-field {
 
 html {
   height: 100%;
-  font-family: "Source Han Sans SC", Roboto, "Helvetica Neue", "Microsoft YaHei", SimHei, NSimSun, SimSun, sans-serif;
+  /* font-family: "Source Han Sans SC", Roboto, "Helvetica Neue", "Microsoft YaHei", SimHei, NSimSun, SimSun, sans-serif; */
 }
 
 body {
@@ -28,6 +28,36 @@ body {
 
 a {
   text-decoration: none;
+}
+
+#indexMainBody {
+  width: 960px;
+  margin: auto;
+}
+
+header h1,
+header h2,
+header h3,
+header h4,
+header h5,
+header h6 {
+  text-align: center;
+}
+
+#indexNav {
+  text-align: center;
+}
+
+#indexNav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: medium;
+  line-height: 3;
+}
+
+#indexNav li {
+  list-style: none;
 }
 
 input[type="button"],
@@ -171,54 +201,6 @@ img.iconImagePreview {
 .detailImages .imgBox>img {
   max-width: 100%;
   max-height: 100%;
-}
-
-#tinyPanelOverlay {
-  width: 240px;
-}
-
-.tinyPanelBody {
-  background-color: #fff;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid #808080;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.tinyPaneCloseButton {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  font-size: 20px;
-  cursor: pointer;
-  font-family: SimSun, serif, monospace;
-  line-height: 1;
-}
-
-.tinyPaneCloseButton:hover {
-  font-weight: bold;
-}
-
-.tinyPanelFoot {
-  margin-top: -1px;
-  height: 21px;
-  background: url(../images/overlay/popup_foot_tiny.png) 60px 0 no-repeat;
-}
-
-.tinyPanelBody .detailImages .imgBox {
-  width: 100px;
-  height: 75px;
-}
-
-.tinyPanelBody table {
-  border-collapse: collapse;
-}
-
-.tinyPanelBody td:first-child {
-  text-align: right;
-  width: 72px;
-  vertical-align: top;
 }
 
 .plainButton {
