@@ -93,6 +93,50 @@ function copy_opus() {
       this.end();
     });
 }
+function generateIndex(dirPath) {
+  try {
+    console.log('Task:generateIndex,', dirPath);
+    const fsItems = fs.readdirSync(dirPath, { withFileTypes: true }, function (err, items) {
+      console.log('fs.readdir error', err, items);
+    });
+    console.log('fs.readdir', fsItems);
+
+    const structure = {
+      directories: [],
+      files: []
+    };
+
+    for (const item of fsItems) {
+      if (item.isDirectory()) {
+        structure.directories.push(item.name);
+      } else if (item.isFile()) {
+        structure.files.push(item.name);
+      }
+    }
+
+    const jsonContent = JSON.stringify(structure, null, 4);
+    const indexPath = `${dirPath.replace(/\\/g, '/')}/index.json`;
+
+    fs.writeFileSync(indexPath, jsonContent);
+    console.log(`Generated: ${indexPath}`);
+  } catch (err) {
+    console.error(`Error generating index for ${dirPath}:`, err);
+  }
+}
+
+
+export function make_index_opus() {
+  return src('src/opus/**/', { read: false })
+    .pipe(through2.obj((file, enc, cb) => {
+      const dirPath = file.path; // Already resolved by gulp.src with correct path
+      try {
+        generateIndex(file.path);
+        cb(); // 在异步操作成功后调用回调函数
+      } catch (err) {
+        cb(err); // 如果发生错误，将错误传递给回调函数
+      }
+    }));
+}
 
 function copy_html() {
   return src('src/view/**/*.html')
