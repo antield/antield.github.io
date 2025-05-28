@@ -1,4 +1,6 @@
 {
+    "order": 2,
+    "name": "实操技能",
     "directories": [],
     "files": [
         "article1.md"

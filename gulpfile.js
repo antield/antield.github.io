@@ -9,7 +9,7 @@ import gulpWebpack from 'webpack-stream';
 import path from 'path';
 import named from 'vinyl-named';
 import through2 from 'through2';
-import fs from 'fs';
+import fs from 'fs/promises';
 import Webpack_Config_Prod from './webpack.prod.js';
 import Webpack_Config_Dev from './webpack.dev.js';
 import ghpages from 'gh-pages';
@@ -67,9 +67,9 @@ function web_server() {
 
 // 自定义函数来注入内容到模板
 function injectContent(templatePath) {
-  return through2.obj(function (file, enc, cb) {
+  return through2.obj(async function (file, enc, cb) {
     // const fileName = file.stem; // 获取文件名（不带扩展名）
-    const templateContent = fs.readFileSync(templatePath, 'utf8'); // 读取模板文件内容
+    const templateContent = await fs.readFile(templatePath, 'utf8'); // 读取模板文件内容
     const outputContent = templateContent.replace('<!-- @@content -->', file.contents.toString()); // 替换模板中的占位符
     file.contents = Buffer.from(outputContent);
     file.extname = '.html';
@@ -93,13 +93,10 @@ function copy_opus() {
       this.end();
     });
 }
-function generateIndex(dirPath) {
+async function generateIndex(dirPath) {
   try {
-    console.log('Task:generateIndex,', dirPath);
-    const fsItems = fs.readdirSync(dirPath, { withFileTypes: true }, function (err, items) {
-      console.log('fs.readdir error', err, items);
-    });
-    console.log('fs.readdir', fsItems);
+    // console.log('Task:generateIndex,', dirPath);
+    const fsItems = await fs.readdir(dirPath, { withFileTypes: true });
 
     const structure = {
       directories: [],
@@ -110,30 +107,50 @@ function generateIndex(dirPath) {
       if (item.isDirectory()) {
         structure.directories.push(item.name);
       } else if (item.isFile()) {
-        structure.files.push(item.name);
+        if (item.name != "index.json") {
+          structure.files.push(item.name);
+        }
       }
     }
 
-    const jsonContent = JSON.stringify(structure, null, 4);
     const indexPath = `${dirPath.replace(/\\/g, '/')}/index.json`;
-
-    fs.writeFileSync(indexPath, jsonContent);
-    console.log(`Generated: ${indexPath}`);
+    const existContent = await readOrCreateFile(indexPath, '{}');
+    const contentObj = JSON.parse(existContent);
+    contentObj.directories  = structure.directories;
+    contentObj.files = structure.files;
+    const jsonContent = JSON.stringify(contentObj, null, 4);
+    fs.writeFile(indexPath, jsonContent);
   } catch (err) {
     console.error(`Error generating index for ${dirPath}:`, err);
   }
 }
 
+async function readOrCreateFile(filePath, defaultContent = '') {
+  try {
+    // 尝试读取文件内容
+    const content = await fs.readFile(filePath, 'utf8');
+    return content;
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      const dirPath = path.dirname(filePath);
+      await fs.mkdir(dirPath, { recursive: true });
+      await fs.writeFile(filePath, defaultContent, 'utf8');
+      return defaultContent;
+    } else {
+      throw err;
+    }
+  }
+}
 
-export function make_index_opus() {
+export function make_opus_index() {
   return src('src/opus/**/', { read: false })
-    .pipe(through2.obj((file, enc, cb) => {
-      const dirPath = file.path; // Already resolved by gulp.src with correct path
+    .pipe(through2.obj(async function (file, enc, cb) {
+      const dirPath = file.path;
       try {
         generateIndex(file.path);
-        cb(); // 在异步操作成功后调用回调函数
+        cb();
       } catch (err) {
-        cb(err); // 如果发生错误，将错误传递给回调函数
+        cb(err);
       }
     }));
 }
