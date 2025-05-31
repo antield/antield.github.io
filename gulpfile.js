@@ -14,6 +14,9 @@ import Webpack_Config_Prod from './webpack.prod.js';
 import Webpack_Config_Dev from './webpack.dev.js';
 import ghpages from 'gh-pages';
 
+const opus_file_template = 'src/template/md-item.htm';
+const opus_folder_template = 'src/template/md-item.htm';
+
 const pkg = {
   "name": "yunjiang.xin",
   "port": 9602,
@@ -44,44 +47,23 @@ function web_server() {
     host: pkg.host,
     livereload: true,
     open: STRAT_PAGE,
-    middleware: [
-      function (req, res, next) {
-        const url = req.url;
-        console.log("url: " + url);
-
-        // 检查请求的 URL 是否以 .woff 或 .woff2 结尾
-        if (url.endsWith('.woff')) {
-          res.setHeader('Content-Type', 'font/woff');
-          res.setHeader('Content-Encoding', 'identity');
-        } else if (url.endsWith('.woff2')) {
-          res.setHeader('Content-Type', 'font/woff2');
-          res.setHeader('Content-Encoding', 'identity');
-        }
-
-        // 继续处理其他请求
-        next();
-      }
-    ]
   }));
 }
 
-// 自定义函数来注入内容到模板
-function injectContent(templatePath) {
+function injectOpusFileContent(templateContent) {
   return through2.obj(async function (file, enc, cb) {
-    // const fileName = file.stem; // 获取文件名（不带扩展名）
-    const templateContent = await fs.readFile(templatePath, 'utf8'); // 读取模板文件内容
-    const outputContent = templateContent.replace('<!-- @@content -->', file.contents.toString()); // 替换模板中的占位符
+    const outputContent = templateContent.replace('<!-- @@content -->', file.contents.toString());
     file.contents = Buffer.from(outputContent);
     file.extname = '.html';
-    // console.log("file.path: " + file.path);
     cb(null, file);
   });
 }
 
-function copy_opus() {
+async function copy_opus() {
+  const opusFileTemplateContent = await fs.readFile(opus_file_template, 'utf8');
   return src('src/opus/**/*.md')
     .pipe(markdown())
-    .pipe(injectContent('src/template/md-item.htm'))
+    .pipe(injectOpusFileContent(opusFileTemplateContent))
     .pipe(FileInclude({
       prefix: '<!--%',
       suffix: '%-->',
@@ -95,20 +77,31 @@ function copy_opus() {
 }
 async function generateIndex(dirPath) {
   try {
-    // console.log('Task:generateIndex,', dirPath);
     const fsItems = await fs.readdir(dirPath, { withFileTypes: true });
 
+    const directories = [];
+    const files = [];
     const structure = {
-      directories: [],
-      files: []
+      directories,
+      files,
     };
 
     for (const item of fsItems) {
       if (item.isDirectory()) {
-        structure.directories.push(item.name);
+        const subDirJsonPath = path.join(item.parentPath, item.name, 'index.json');
+        const subJsonStr = await readOrCreateFile(subDirJsonPath, '{}');
+        const subDirJson = JSON.parse(subJsonStr);
+        const name = subDirJson.name || item.name;
+        const customPath = subDirJson.customPath || item.name + '/';
+        const order = subDirJson.order || 1;
+        directories.push({
+          name,
+          customPath,
+          order,
+        });
       } else if (item.isFile()) {
         if (item.name != "index.json") {
-          structure.files.push(item.name);
+          files.push(item.name);
         }
       }
     }
@@ -116,7 +109,7 @@ async function generateIndex(dirPath) {
     const indexPath = `${dirPath.replace(/\\/g, '/')}/index.json`;
     const existContent = await readOrCreateFile(indexPath, '{}');
     const contentObj = JSON.parse(existContent);
-    contentObj.directories  = structure.directories;
+    contentObj.directories = structure.directories;
     contentObj.files = structure.files;
     const jsonContent = JSON.stringify(contentObj, null, 4);
     fs.writeFile(indexPath, jsonContent);
