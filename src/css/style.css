@@ -41,6 +41,14 @@ header h6 {
   text-align: center;
 }
 
+.displayBlock {
+  display: block;
+}
+
+.displayNone {
+  display: none;
+}
+
 #indexNav {
   text-align: center;
 }
@@ -79,7 +87,7 @@ header h6 {
   color: grey;
 }
 
-#contactInfo{
+#contactInfo {
   margin-top: 2em;
 }
 

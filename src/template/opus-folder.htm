@@ -3,12 +3,12 @@
 
 <head>
   <meta charset="utf-8">
-  <title>云匠心</title>
-  <link rel="stylesheet" href="css/lib/iconfont/material-icons.css" type="text/css">
+  <title><!-- @@title --></title>
   <link rel="stylesheet" href="css/style.css" type="text/css">
   <link rel="stylesheet" href="css/pageFraming.css" type="text/css">
   <link rel="stylesheet" href="css/pageSwitcher.css" type="text/css">
   <link rel="stylesheet" href="css/loginBoard.css" type="text/css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -34,7 +34,14 @@
     </div>
   </div>
   <div id="mainBody">
-    <!-- @@content -->
+    <div class="@@foldersContentDisplayClass">
+      <h3>子目录</h3>
+      <!-- @@foldersContent -->
+    </div>
+    <div class="@@articlesContentDisplayClass">
+      <h3>章节</h3>
+      <!-- @@articlesContent -->
+    </div>
   </div>
   <!--%include('src/include/loginBoard.htm')%-->
   <script type="text/javascript" src="js/compile-less/map_config.js"></script>

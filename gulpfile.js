@@ -14,9 +14,6 @@ import Webpack_Config_Prod from './webpack.prod.js';
 import Webpack_Config_Dev from './webpack.dev.js';
 import ghpages from 'gh-pages';
 
-const opus_file_template = 'src/template/md-item.htm';
-const opus_folder_template = 'src/template/md-item.htm';
-
 const pkg = {
   "name": "yunjiang.xin",
   "port": 9602,
@@ -59,11 +56,70 @@ function injectOpusFileContent(templateContent) {
   });
 }
 
-async function copy_opus() {
-  const opusFileTemplateContent = await fs.readFile(opus_file_template, 'utf8');
+async function copy_opus_article() {
+  const opus_article_template = 'src/template/opus-article.htm';
+  const opusArticleTemplateContent = await fs.readFile(opus_article_template, 'utf8');
   return src('src/opus/**/*.md')
     .pipe(markdown())
-    .pipe(injectOpusFileContent(opusFileTemplateContent))
+    .pipe(injectOpusFileContent(opusArticleTemplateContent))
+    .pipe(FileInclude({
+      prefix: '<!--%',
+      suffix: '%-->',
+      basepath: '@root'
+    }))
+    .pipe(dest(Dist));
+}
+
+
+function injectOpusFolderContent(templateContent) {
+  return through2.obj(async function (file, enc, cb) {
+    let outputContent = templateContent;
+    const jsonStr = file.contents.toString();
+    const folderInfo = JSON.parse(jsonStr);
+    const title = folderInfo.name || file.dirname.substring(file.dirname.lastIndexOf(path.sep) + 1);
+    outputContent = outputContent.replace('<!-- @@title -->', title);
+    const folderArr = folderInfo.directories;
+    folderArr.sort(function (a, b) {
+      return a.order - b.order;
+    });
+    if (folderArr.length == 0) {
+      const displayClassName = " displayNone";
+      outputContent = outputContent.replace('@@foldersContentDisplayClass', displayClassName);
+      outputContent = outputContent.replace('<!-- @@foldersContent -->', "");
+    } else {
+      const displayClassName = " displayBlock";
+      outputContent = outputContent.replace('@@foldersContentDisplayClass', displayClassName);
+      const folderArrLiHtml = folderArr.map(function (item) {
+        return '<li><a href="' + item.customPath + '">' + item.name + '</a></li>\n';
+      });
+      const folderArrUlHtml = '<ul class="folder-list">\n' + folderArrLiHtml.join('') + '</ul>\n';
+      outputContent = outputContent.replace('<!-- @@foldersContent -->', folderArrUlHtml);
+    }
+    const fileArr = folderInfo.files;
+    if (fileArr.length == 0) {
+      const displayClassName = " displayNone";
+      outputContent = outputContent.replace('@@articlesContentDisplayClass', displayClassName);
+      outputContent = outputContent.replace('<!-- @@articlesContent -->', "");
+    } else {
+      const displayClassName = " displayBlock";
+      outputContent = outputContent.replace('@@articlesContentDisplayClass', displayClassName);
+      const fileArrLiHtml = fileArr.map(function (item) {
+        return '<li><a href="' + item + '.html">' + item + '</a></li>';
+      })
+      const fileArrUlHtml = '<ul class="article-list">\n' + fileArrLiHtml.join('') + '</ul>\n';
+      outputContent = outputContent.replace('<!-- @@articlesContent -->', fileArrUlHtml);
+    }
+    file.contents = Buffer.from(outputContent);
+    file.extname = '.html';
+    cb(null, file);
+  });
+}
+
+export async function copy_opus_folder_index() {
+  const opus_folder_template = 'src/template/opus-folder.htm';
+  const templateContent = await fs.readFile(opus_folder_template, 'utf8');
+  return src('src/opus/**/index.json')
+    .pipe(injectOpusFolderContent(templateContent))
     .pipe(FileInclude({
       prefix: '<!--%',
       suffix: '%-->',
@@ -71,51 +127,46 @@ async function copy_opus() {
     }))
     .pipe(dest(Dist))
     .on('error', function (err) {
-      console.error('Task:copy_md_opus,', err.message);
+      console.error('Task:copy_opus_folder_index:', err.message);
       this.end();
     });
 }
+
 async function generateIndex(dirPath) {
-  try {
-    const fsItems = await fs.readdir(dirPath, { withFileTypes: true });
+  const fsItems = await fs.readdir(dirPath, { withFileTypes: true });
 
-    const directories = [];
-    const files = [];
-    const structure = {
-      directories,
-      files,
-    };
+  const directories = [];
+  const files = [];
 
-    for (const item of fsItems) {
-      if (item.isDirectory()) {
-        const subDirJsonPath = path.join(item.parentPath, item.name, 'index.json');
-        const subJsonStr = await readOrCreateFile(subDirJsonPath, '{}');
-        const subDirJson = JSON.parse(subJsonStr);
-        const name = subDirJson.name || item.name;
-        const customPath = subDirJson.customPath || item.name + '/';
-        const order = subDirJson.order || 1;
-        directories.push({
-          name,
-          customPath,
-          order,
-        });
-      } else if (item.isFile()) {
-        if (item.name != "index.json") {
-          files.push(item.name);
-        }
-      }
+  for (const item of fsItems) {
+    if (item.isDirectory()) {
+      const subDirJsonPath = path.join(item.parentPath, item.name, 'index.json');
+      const subJsonStr = await readOrCreateFile(subDirJsonPath, '{}');
+      const subDirJson = JSON.parse(subJsonStr);
+      const name = subDirJson.name || item.name;
+      const customPath = subDirJson.customPath || item.name + '/';
+      const order = subDirJson.order || 1;
+      directories.push({
+        name,
+        customPath,
+        order,
+      });
+    } else if (item.isFile()) {
+      if (item.name == "index.json")
+        continue;
+
+      files.push(item.name);
+
     }
-
-    const indexPath = `${dirPath.replace(/\\/g, '/')}/index.json`;
-    const existContent = await readOrCreateFile(indexPath, '{}');
-    const contentObj = JSON.parse(existContent);
-    contentObj.directories = structure.directories;
-    contentObj.files = structure.files;
-    const jsonContent = JSON.stringify(contentObj, null, 4);
-    fs.writeFile(indexPath, jsonContent);
-  } catch (err) {
-    console.error(`Error generating index for ${dirPath}:`, err);
   }
+
+  const indexPath = path.join(dirPath, 'index.json');
+  const existContent = await readOrCreateFile(indexPath, '{}');
+  const contentObj = JSON.parse(existContent);
+  contentObj.directories = directories;
+  contentObj.files = files;
+  const jsonContent = JSON.stringify(contentObj, null, 4);
+  fs.writeFile(indexPath, jsonContent);
 }
 
 async function readOrCreateFile(filePath, defaultContent = '') {
@@ -139,12 +190,8 @@ export function make_opus_index() {
   return src('src/opus/**/', { read: false })
     .pipe(through2.obj(async function (file, enc, cb) {
       const dirPath = file.path;
-      try {
-        generateIndex(file.path);
-        cb();
-      } catch (err) {
-        cb(err);
-      }
+      generateIndex(file.path);
+      cb();
     }));
 }
 
@@ -154,10 +201,8 @@ function copy_html() {
       prefix: '<!--%',
       suffix: '%-->',
       basepath: '@file'
-    })).on('error', function (err) {
-      console.error('Task:copy-html,', err.message);
-      this.end();
-    }).pipe(dest(Dist));
+    }))
+    .pipe(dest(Dist));
 }
 
 function compile_js() {
@@ -198,7 +243,7 @@ export function copy_deploy() {
   return src('src/deploy/**', { encoding: false }).pipe(dest(Dist));
 }
 
-var copy_sources = parallel(copy_css, copy_css_lib, copy_js_lib, copy_js_compile_less, copy_html, copy_opus, copy_images);
+var copy_sources = parallel(copy_css, copy_css_lib, copy_js_lib, copy_js_compile_less, copy_html, copy_opus_article, copy_images);
 
 export function clean_task() {
   return src(Dist, {
@@ -206,7 +251,7 @@ export function clean_task() {
   }).pipe(Clean());
 }
 
-const start = series(clean_task, copy_sources, compile_js, web_server, watch_task);
+const start = series(clean_task, copy_sources, compile_js, web_server, watch_task, make_opus_index, copy_opus_folder_index);
 
 function changeToProd(cb) {
   Dist = Dist_Prod;
@@ -214,7 +259,7 @@ function changeToProd(cb) {
   cb();
 }
 
-export const build = series(changeToProd, clean_task, copy_sources, copy_deploy, compile_js);
+export const build = series(changeToProd, clean_task, copy_sources, copy_deploy, compile_js, make_opus_index, copy_opus_folder_index);
 
 export const gh_deploy = (cb) => {
   ghpages.publish(Dist_Prod, (err) => {

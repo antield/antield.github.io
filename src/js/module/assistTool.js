@@ -11,7 +11,7 @@ import dialogPolyfill from 'dialog-polyfill';
  * Object.fromEntries folyfill
  */
 if (typeof Object.fromEntries != "function") {
-  Object.fromEntries = function(iterable) {
+  Object.fromEntries = function (iterable) {
     var entries = ('entries' in iterable ? iterable.entries() : iterable);
     var object = {};
     var entry;
@@ -36,12 +36,12 @@ if (typeof Object.fromEntries != "function") {
  */
 export function groupBy(array, fn) {
   let groups = {};
-  array.forEach(function(o) {
+  array.forEach(function (o) {
     let group = fn(o);
     groups[group] = groups[group] || [];
     groups[group].push(o);
   });
-  return Object.keys(groups).map(function(group) {
+  return Object.keys(groups).map(function (group) {
     return {
       key: group,
       list: groups[group]
@@ -97,7 +97,7 @@ const templatePieceRegex = getTemplatePieceRegex();
  * @return {string}          生成的HTML
  */
 export function replaceTemplateWithObject(template, obj) {
-  return template.replace(templatePieceRegex, function(match, p1, p2, p3, p4, p5) {
+  return template.replace(templatePieceRegex, function (match, p1, p2, p3, p4, p5) {
     if (p1) {
       let matchedText = p1;
       let isHtmlContent = matchedText.indexOf("+") === 1;
@@ -204,7 +204,7 @@ export function replaceTemplateWithObject(template, obj) {
  * @return {HTMLDialogElement}             对话框对象
  */
 export function showMessageTip(messageHtml) {
-  messageHtml = "<span class=\"material-symbols-outlined\" style=\"color:blue;margin-right:1em;vertical-align:middle;font-variation-settings:'FILL' 1;\">info</span>" + messageHtml;
+  messageHtml = "<span class=\"material-icons\" style=\"color:blue;margin-right:1em;vertical-align:middle;\">info</span>" + messageHtml;
   let dialog = showMessageDialog(messageHtml, true, true);
   dialog.blur();
   return dialog;
@@ -258,7 +258,7 @@ export function showMessageDialog(messageHtml, forAMoment, noModal) {
   }
 
   if (forAMoment) {
-    setTimeout(function() {
+    setTimeout(function () {
       //dialog.close();
       dialog.parentNode.removeChild(dialog);
     }, 5000);
@@ -273,7 +273,7 @@ export function showMessageDialog(messageHtml, forAMoment, noModal) {
  * @return {Promise}         确认结果Promise
  */
 export function confirmDialog(message) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     let infoDiv = document.createElement("div");
     let iconSpan = document.createElement("span");
     iconSpan.textContent = "提示：";
@@ -300,11 +300,11 @@ export function confirmDialog(message) {
     boxDiv.appendChild(infoDiv);
     boxDiv.appendChild(submitRowDiv);
     let dialog = showMessageDialog(boxDiv);
-    submitButton.onclick = function() {
+    submitButton.onclick = function () {
       dialog.parentNode.removeChild(dialog);
       resolve(true);
     };
-    cancelButton.onclick = function() {
+    cancelButton.onclick = function () {
       dialog.parentNode.removeChild(dialog);
       resolve(false);
     };
@@ -414,7 +414,7 @@ export function checkRespOkToJson(response) {
   } else {
     if (!response.ok)
       console.error("not response ok, status:" + response.status + ", statusText:" + response.statusText);
-    return response.text().then(function(text) {
+    return response.text().then(function (text) {
       try {
         let obj = JSON.parse(text);
         return obj;

@@ -5,17 +5,17 @@
         {
             "name": "人格心理学",
             "customPath": "人格心理学/",
-            "order": 1
+            "order": 4
         },
         {
             "name": "发展心理学",
             "customPath": "发展心理学/",
-            "order": 1
+            "order": 3
         },
         {
             "name": "变态心理学与健康心理学",
             "customPath": "变态心理学与健康心理学/",
-            "order": 1
+            "order": 5
         },
         {
             "name": "基础心理学",
@@ -25,12 +25,12 @@
         {
             "name": "心理咨询概论",
             "customPath": "心理咨询概论/",
-            "order": 1
+            "order": 6
         },
         {
             "name": "社会心理学",
             "customPath": "社会心理学/",
-            "order": 1
+            "order": 2
         }
     ],
     "files": []

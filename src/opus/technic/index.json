@@ -1,7 +1,28 @@
 {
     "order": 2,
     "name": "实操技能",
-    "directories": [],
+    "directories": [
+        {
+            "name": "心理咨询专业论理",
+            "customPath": "心理咨询专业论理/",
+            "order": 4
+        },
+        {
+            "name": "心理咨询技能",
+            "customPath": "心理咨询技能/",
+            "order": 2
+        },
+        {
+            "name": "心理测验技能",
+            "customPath": "心理测验技能/",
+            "order": 3
+        },
+        {
+            "name": "心理诊断技能",
+            "customPath": "心理诊断技能/",
+            "order": 1
+        }
+    ],
     "files": [
         "article1.md"
     ]
