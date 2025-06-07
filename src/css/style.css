@@ -12,7 +12,6 @@ md-outlined-text-field {
 
 html {
   height: 100%;
-  /* font-family: "Source Han Sans SC", Roboto, "Helvetica Neue", "Microsoft YaHei", SimHei, NSimSun, SimSun, sans-serif; */
 }
 
 body {
@@ -23,6 +22,29 @@ body {
 
 a {
   text-decoration: none;
+}
+
+#headerWrapper {
+  border-bottom: gray 1px solid;
+}
+
+header {
+  width: 1024px;
+  margin: auto;
+}
+
+header .navLine>* {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+header #logo,
+header nav {
+  vertical-align: middle;
+}
+
+header nav {
+  margin-left: 2em;
 }
 
 #mainBody {
@@ -36,9 +58,9 @@ header h3,
 header h4,
 header h5,
 header h6 {
-  padding: 1em;
+  margin: 0;
+  padding: 0;
   line-height: 3;
-  text-align: center;
 }
 
 .displayBlock {
@@ -79,12 +101,6 @@ header h6 {
 
 #navigator li:not(:last-child) {
   padding-right: 1em;
-}
-
-#navigator li:not(:last-child)::after {
-  margin-left: 1em;
-  content: "|";
-  color: grey;
 }
 
 #contactInfo {
