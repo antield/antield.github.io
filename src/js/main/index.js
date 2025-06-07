@@ -8,7 +8,7 @@ function getTokenStr() {
 
 function uploadImage(formData, imgElement, inputHidden) {
   let url = poiManageApiUrl + "sys/file/upload-image";
-  let invokeBefore = function() {
+  let invokeBefore = function () {
     return fetch(url, {
       method: 'POST',
       headers: new Headers({
@@ -17,7 +17,7 @@ function uploadImage(formData, imgElement, inputHidden) {
       body: formData,
     }).then(AssistTool.checkRespOkToJson);
   };
-  let invokeAfter = function(resultObj) {
+  let invokeAfter = function (resultObj) {
     resultObj = AssistTool.regulateRestResult(resultObj);
     if (!resultObj.success) {
       AssistTool.showMessageTip(resultObj.message);
@@ -31,16 +31,16 @@ function uploadImage(formData, imgElement, inputHidden) {
 }
 
 function initData() {
-  
+
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  let afterLogin = function(loginResult) {
+document.addEventListener("DOMContentLoaded", function () {
+  let afterLogin = function (loginResult) {
     if (loginResult) {
       initData();
     }
   };
-  //LoginModule.init("loginBoard", "loginedInfoBar", "needLoginInfoBar", afterLogin);
+  LoginModule.init(afterLogin, false);
 });
 
 window.AssistTool = AssistTool;

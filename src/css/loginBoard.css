@@ -12,9 +12,22 @@
 
 .loginResultTip {
   color: #a00;
+  font-size: 14px;
 }
 
-#loginedInfoBar, #needLoginInfoBar {
+.loginResultTip .material-icons {
+  color: #a00;
+  font-size: 16px;
+  margin-right: 0.25em;
+  vertical-align: middle;
+}
+
+.loginResultTip .errorMsg {
+  vertical-align: middle;
+}
+
+#loginedInfoBar,
+#needLoginInfoBar {
   position: absolute;
   top: 0;
   right: 0;
@@ -22,17 +35,18 @@
 }
 
 .inputRow {
-  padding: 0.5em 0;
+  padding: 0.75em 0;
 }
 
 .inputElement {
   width: 260px;
+  height: 36px;
+  padding: 0 1em;
+  box-sizing: border-box;
 }
 
 .loginSubmitRow {
-  text-align: center;
-  margin-top: 0em;
-  margin-bottom: 1.5em;
+  padding: 0.75em 0;
 }
 
 .submitButton {
@@ -40,10 +54,20 @@
   color: white;
   border-radius: 5px;
   border-width: 0;
-  font-size: 16px;
+  font-size: 14px;
   padding: 6px 32px;
   font-family: '思源黑体', 'Microsoft YaHei', monospace;
   vertical-align: middle;
-  height: 56px;
-  margin-top: 18px;
+  box-sizing: border-box;
+  width: 260px;
+  height: 36px;
+}
+
+#croppedImageInput::-webkit-slider-thumb {
+  cursor: pointer;
+}
+
+#registerBoard .inputRow:has(>:required)::after {
+  content: '*';
+  color: red;
 }

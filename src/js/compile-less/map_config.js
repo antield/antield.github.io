@@ -10,3 +10,5 @@ var contextPath = "/zaxq-poi-api/"
 // var contextPath = location.href.substring(locationOrigin.length,location.href.indexOf("/",locationOrigin.length+1)+1);
 
 var poiManageApiUrl = locationOrigin + contextPath;
+
+var loginSubmitContextPath = "http://10.60.0.44:16000/district-api/";

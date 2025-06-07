@@ -1,17 +1,25 @@
 <div id="loginBoard" class="loginBoard" style="display:none;">
   <form class="loginForm" action="javascript:;">
-    <h4 class="loginFormTitle"><span class="material-icons md-account_circle" style="margin-right:0.25em;vertical-align:middle;"></span>系统登录</h4>
+    <h4 class="loginFormTitle"><span class="material-icons"
+        style="margin-right:0.25em;vertical-align:middle;">account_circle</span>系统登录</h4>
     <div class="inputRow">
-      <md-outlined-text-field id="username" name="username" label="用户名" class="inputElement" required></md-outlined-text-field>
+      <input id="username" name="username" label="账户名" placeholder="账户名" class="inputElement" required />
     </div>
     <div class="inputRow">
-      <md-outlined-text-field type="password" id="password" name="password" class="inputElement" label="密码" required></md-outlined-text-field>
+      <input type="password" id="password" name="password" class="inputElement" label="密码" placeholder="密码" required />
     </div>
-    <div class="loginResultTip"></div>
+    <div class="loginResultTip" style="display: none;">
+      <span class="material-icons">error</span>
+      <span class="errorMsg"></span>
+    </div>
     <div class="loginSubmitRow">
-      <input id="loginSubmitButton" type="submit" value="登录" class="submitButton inputElement" />
+      <input id="loginSubmitButton" type="submit" value="登录" class="submitButton" />
     </div>
   </form>
+  <div>
+    <span>没有账户？</span>
+    <a href="javascript:;" id="registerAnchor">注册</a>
+  </div>
 </div>
 
 <div id="loginedInfoBar" style="display:none;">
@@ -19,6 +27,59 @@
   <span class="nickname"></span>
   <a href="javascript:;" class="logoutAnchor">退出</a>
 </div>
-<div id="needLoginInfoBar" style="display:none;">
+<div id="needLoginInfoBar">
   <a href="javascript:;" class="loginAnchor">登录</a>
+</div>
+
+<div id="captchaBoard" style="display: none;">
+  <div id="captchaImageContainer" style="position: relative;width: 256px;height: 192px;overflow: hidden;">
+    <img id="captchaImage" src="" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;" />
+    <img id="croppedImage" src="" style="position: absolute;box-shadow: 0px 0px 2px 2px #808080;" />
+  </div>
+  <div class="inputRow">
+    <input id="croppedImageInput" type="range" min="0" max="239" value="0" style="width: 256px;" />
+  </div>
+  <div id="captchaTip" class="loginResultTip" style="display: none;">
+    <span class="material-icons">error</span>
+    <span class="errorMsg"></span>
+  </div>
+  <div class="loginSubmitRow">
+    <input id="captchaSubmitButton" type="submit" value="已完成" class="submitButton" />
+  </div>
+</div>
+
+<div id="registerBoard" style="display: none;">
+  <form id="registerForm" action="javascript:;" style="padding: 1em 2em;">
+    <div class="inputRow">
+      <input id="registerUsername" name="username" label="账户名" placeholder="账户名" class="inputElement" size="63"
+        required />
+    </div>
+    <div class="inputRow">
+      <input type="password" id="registerPassword" name="password" class="inputElement" label="密码" placeholder="密码"
+        size="63" required />
+    </div>
+    <div class="inputRow">
+      <input type="password" id="registerPasswordConfirm" name="passwordConfirm" class="inputElement" label="密码确认"
+        placeholder="密码确认" size="63" required />
+    </div>
+    <div class="inputRow">
+      <input type="text" id="nickname" name="nickname" label="昵称" placeholder="昵称" class="inputElement" size="63" />
+    </div>
+    <div class="inputRow">
+      <input type="text" id="phone" name="phone" label="手机" placeholder="电话" class="inputElement" size="63" />
+    </div>
+    <div class="inputRow">
+      <input type="text" id="mail" name="mail" label="邮箱" placeholder="邮箱" class="inputElement" size="255" />
+    </div>
+    <div id="registerTip" class="loginResultTip" style="display: none;">
+      <span class="material-icons">error</span>
+      <span class="errorMsg"></span>
+    </div>
+    <div class="loginSubmitRow">
+      <input id="registerSubmitButton" type="submit" value="注册" class="submitButton" />
+    </div>
+    <div class="inputRow">
+      <input id="cancelRegisterButton" type="button" value="取消" class="submitButton" />
+    </div>
+  </form>
 </div>
