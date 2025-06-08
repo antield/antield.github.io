@@ -75,7 +75,13 @@ function injectOpusFolderContent(templateContent) {
   return through2.obj(async function (file, enc, cb) {
     let outputContent = templateContent;
     const jsonStr = file.contents.toString();
-    const folderInfo = JSON.parse(jsonStr);
+    let folderInfo;
+    try {
+      folderInfo = JSON.parse(jsonStr);
+    } catch (e) {
+      console.log("parse folderInfo error: " + e);
+      folderInfo = {};
+    }
     const title = folderInfo.name || file.dirname.substring(file.dirname.lastIndexOf(path.sep) + 1);
     outputContent = outputContent.replace('<!-- @@title -->', title);
     const folderArr = folderInfo.directories;
@@ -125,11 +131,7 @@ export async function copy_opus_folder_index() {
       suffix: '%-->',
       basepath: '@root'
     }))
-    .pipe(dest(Dist))
-    .on('error', function (err) {
-      console.error('Task:copy_opus_folder_index:', err.message);
-      this.end();
-    });
+    .pipe(dest(Dist));
 }
 
 async function generateIndex(dirPath) {
@@ -142,7 +144,13 @@ async function generateIndex(dirPath) {
     if (item.isDirectory()) {
       const subDirJsonPath = path.join(item.parentPath, item.name, 'index.json');
       const subJsonStr = await readOrCreateFile(subDirJsonPath, '{}');
-      const subDirJson = JSON.parse(subJsonStr);
+      let subDirJson;
+      try {
+        subDirJson = JSON.parse(subJsonStr);
+      } catch (e) {
+        console.log("parse subDirJson error: " + e);
+        subDirJson = {};
+      }
       const name = subDirJson.name || item.name;
       const customPath = subDirJson.customPath || item.name + '/';
       const order = subDirJson.order || 1;
@@ -162,7 +170,13 @@ async function generateIndex(dirPath) {
 
   const indexPath = path.join(dirPath, 'index.json');
   const existContent = await readOrCreateFile(indexPath, '{}');
-  const contentObj = JSON.parse(existContent);
+  let contentObj;
+  try {
+    contentObj = JSON.parse(existContent);
+  } catch (e) {
+    console.log("parse index.json error: " + e);
+    contentObj = {};
+  }
   contentObj.directories = directories;
   contentObj.files = files;
   const jsonContent = JSON.stringify(contentObj, null, 4);

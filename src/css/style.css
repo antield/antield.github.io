@@ -17,20 +17,25 @@ html {
 body {
   height: 100%;
   margin: 0;
-  overflow: hidden;
 }
 
 a {
   text-decoration: none;
 }
 
+a:link,
+a:visited {
+  color: #016cff;
+}
+
 #headerWrapper {
-  border-bottom: gray 1px solid;
+  border-bottom: 1px solid gray;
 }
 
 header {
   width: 1024px;
   margin: auto;
+  padding: 0 1em;
 }
 
 header .navLine>* {
@@ -43,6 +48,28 @@ header nav {
   vertical-align: middle;
 }
 
+header a:link,
+header a:visited {
+  color: black;
+}
+
+#logo {
+  color: green;
+}
+
+#logo h2 {
+  display: inline;
+  vertical-align: middle;
+}
+
+#logo::before {
+  content: 'Ψ';
+  display: inline;
+  font-size: 2em;
+  font-family: 'Times New Roman', Times, serif;
+  vertical-align: middle;
+}
+
 header nav {
   margin-left: 2em;
 }
@@ -50,6 +77,23 @@ header nav {
 #mainBody {
   width: 1024px;
   margin: auto;
+  padding: 0 1em;
+}
+
+#mainBodyWrapper {
+  border-bottom: 1px solid gray;
+  padding-bottom: 1em;
+}
+
+#footerWrapper {
+  padding-bottom: 1em;
+}
+
+footer {
+  margin: auto;
+  width: 1024px;
+  text-align: center;
+  padding: 1em;
 }
 
 header h1,
@@ -60,7 +104,7 @@ header h5,
 header h6 {
   margin: 0;
   padding: 0;
-  line-height: 3;
+  line-height: 2.5;
 }
 
 .displayBlock {
@@ -69,22 +113,6 @@ header h6 {
 
 .displayNone {
   display: none;
-}
-
-#indexNav {
-  text-align: center;
-}
-
-#indexNav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: medium;
-  line-height: 3;
-}
-
-#indexNav li {
-  list-style: none;
 }
 
 #navigator ul {
@@ -100,7 +128,30 @@ header h6 {
 }
 
 #navigator li:not(:last-child) {
-  padding-right: 1em;
+  padding-right: 2em;
+}
+
+section p {
+  line-height: 2em;
+}
+
+.learnMoreLink {
+  padding: 0.75em 2em;
+  border: 1px solid #016cff;
+  border-radius: 50px;
+  line-height: 2em;
+}
+
+.learnMoreLink a {
+  vertical-align: middle;
+}
+
+.arrow-forward {
+  vertical-align: middle;
+  font-size: 16px;
+  margin-left: 0.5em;
+  border: 1px solid #016cff;
+  border-radius: 16px;
 }
 
 #contactInfo {

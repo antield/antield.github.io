@@ -3,19 +3,27 @@
 
 <head>
   <meta charset="utf-8">
-  <title>云匠心</title>
+  <title>关于</title>
   <link rel="stylesheet" href="css/style.css" type="text/css">
   <link rel="stylesheet" href="css/loginBoard.css" type="text/css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-  <div id="mainBody">
+  <div id="headerWrapper">
     <header>
-      <h1>云匠心</h1>
+      <div class="navLine">
+        <a href="/" id="logo">
+          <h2>云匠心</h2>
+        </a>
+        <!--%include('../include/navigator.htm',{"activePage":"about"})%-->
+      </div>
     </header>
-    <!--%include('../include/navigator.htm',{"activePage":""})%-->
-    <div id="aboutMainContent">
+  </div>
+  <div id="mainBodyWrapper">
+    <div id="mainBody">
+      <h2>关于</h2>
+      <div id="aboutMainContent">
       <div id="aboutMainContentItem">
         <p>不忘初心，方得始终。匠心，是一种态度，一种追求，一份挚爱，一种信仰。</p>
         <p>没有那金钢钻，别揽瓷器活。匠心，是一个方向，一种积累，一种修行，一种财富。</p>
@@ -26,6 +34,12 @@
         <p>邮箱: antield[at]126.com</p>
       </div>
     </div>
+    </div>
+  </div>
+  <div id="footerWrapper">
+    <footer>
+      邮箱: antield[at]126.com
+    </footer>
   </div>
   <!--%include('../include/loginBoard.htm')%-->
   <script type="text/javascript" src="js/compile-less/map_config.js"></script>
