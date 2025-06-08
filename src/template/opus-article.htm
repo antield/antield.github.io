@@ -3,41 +3,41 @@
 
 <head>
   <meta charset="utf-8">
-  <title>云匠心</title>
-  <link rel="stylesheet" href="css/style.css" type="text/css">
-  <link rel="stylesheet" href="css/pageFraming.css" type="text/css">
-  <link rel="stylesheet" href="css/pageSwitcher.css" type="text/css">
-  <link rel="stylesheet" href="css/loginBoard.css" type="text/css">
+  <title><!-- @@title --></title>
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/loginBoard.css" type="text/css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-  <header>
-    <div id="headerLeft">
-      <div id="logo">
-        云匠心
+  <div id="headerWrapper">
+    <header>
+      <div class="navLine">
+        <a href="/" id="logo">
+          <h2>云匠心</h2>
+        </a>
+        <!--%include('src/include/navigator.htm',{"activePage":""})%-->
       </div>
-      <!--%include('src/include/navigator.htm',{"activePage":""})%-->
-    </div>
-    <div id="headerRight">
-      <div id="searchBox"></div>
-      <div id="memberBox"></div>
-    </div>
-    <div class="bottomLine"></div>
-  </header>
-  <div id="breadcrumb">
-    <div id="breadcrumbInner">
-      <span class="material-icons">home</span>
-      <span>家</span>
-      <span class="material-icons">navigate_next</span>
-      <a class="breadcrumbItem" href="index.html">首页</a>
+    </header>
+  </div>
+  <div id="mainBodyWrapper">
+    <div id="mainBody">
+      <article>
+        <h1><!-- @@title --></h1>
+        <div>
+          <!-- @@content -->
+        </div>
+      </article>
     </div>
   </div>
-  <div id="mainBody">
-    <!-- @@content -->
+  <div id="footerWrapper">
+    <footer>
+      邮箱: antield[at]126.com
+    </footer>
   </div>
   <!--%include('src/include/loginBoard.htm')%-->
-  <script type="text/javascript" src="js/compile-less/map_config.js"></script>
+  <script type="text/javascript" src="/js/compile-less/map_config.js"></script>
+  <script type="text/javascript" src="/js/index.bundle.js"></script>
 </body>
 
 </html>

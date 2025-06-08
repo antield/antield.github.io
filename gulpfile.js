@@ -67,6 +67,10 @@ async function copy_opus_article() {
       suffix: '%-->',
       basepath: '@root'
     }))
+    .on('error', function (err) {
+      console.error('Task:copy_opus_article: ', err.message);
+      this.end();
+    })
     .pipe(dest(Dist));
 }
 
@@ -131,6 +135,10 @@ export async function copy_opus_folder_index() {
       suffix: '%-->',
       basepath: '@root'
     }))
+    .on('error', function (err) {
+      console.error('Task:copy_opus_folder_index: ', err.message);
+      this.end();
+    })
     .pipe(dest(Dist));
 }
 
@@ -216,6 +224,10 @@ function copy_html() {
       suffix: '%-->',
       basepath: '@file'
     }))
+    .on('error', function (err) {
+      console.error('Task:copy_html: ', err.message);
+      this.end();
+    })
     .pipe(dest(Dist));
 }
 

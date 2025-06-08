@@ -28,23 +28,29 @@ a:visited {
   color: #016cff;
 }
 
-#headerWrapper {
+#headerWrapper,
+#mainBodyWrapper {
   border-bottom: 1px solid gray;
 }
 
-header {
+header,
+#mainBody,
+footer {
   width: 1024px;
   margin: auto;
-  padding: 0 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  box-sizing: border-box;
 }
 
-header .navLine>* {
-  display: inline-block;
-  vertical-align: middle;
+#mainBody,
+footer {
+  padding-bottom: 1em;
 }
 
 header #logo,
-header nav {
+header #navigator {
+  display: inline-block;
   vertical-align: middle;
 }
 
@@ -70,38 +76,17 @@ header a:visited {
   vertical-align: middle;
 }
 
-header nav {
+header #navigator {
   margin-left: 2em;
 }
 
-#mainBody {
-  width: 1024px;
-  margin: auto;
-  padding: 0 1em;
-}
-
-#mainBodyWrapper {
-  border-bottom: 1px solid gray;
-  padding-bottom: 1em;
-}
-
-#footerWrapper {
-  padding-bottom: 1em;
-}
-
 footer {
-  margin: auto;
-  width: 1024px;
+  padding-top: 1em;
   text-align: center;
-  padding: 1em;
 }
 
 header h1,
-header h2,
-header h3,
-header h4,
-header h5,
-header h6 {
+header h2 {
   margin: 0;
   padding: 0;
   line-height: 2.5;
@@ -129,6 +114,10 @@ header h6 {
 
 #navigator li:not(:last-child) {
   padding-right: 2em;
+}
+
+section {
+  padding-bottom: 1em;
 }
 
 section p {
