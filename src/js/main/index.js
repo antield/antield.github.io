@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
       initData();
     }
   };
-  LoginModule.init(afterLogin, false);
+  LoginModule.init(afterLogin, false, "loginBar");
 });
 
 window.AssistTool = AssistTool;

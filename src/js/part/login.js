@@ -389,15 +389,21 @@ function enableRequireCaptchaWindow(username) {
 }
 
 
-export function init(afterLogin, requireStartLogin) {
+export function init(afterLogin, requireStartLogin, loginBarElement) {
   loginBoard = document.getElementById("loginBoard");
   loginResultTip = loginBoard.querySelector(".loginResultTip");
+  if (typeof loginBarElement == "string") {
+    loginBarElement = document.getElementById(loginBarElement);
+  }
   needLoginInfoBar = document.getElementById("needLoginInfoBar");
+  needLoginInfoBar.style.display = "inline";
+  loginBarElement.appendChild(needLoginInfoBar);
   let loginAnchor = needLoginInfoBar.querySelector(".loginAnchor");
   loginAnchor.onclick = function () {
     openLoginPromise().then(afterLogin);
   };
   loginedInfoBar = document.getElementById("loginedInfoBar");
+  loginBarElement.appendChild(loginedInfoBar);
   let logoutAnchor = loginedInfoBar.querySelector(".logoutAnchor");
   logoutAnchor.onclick = logout;
 

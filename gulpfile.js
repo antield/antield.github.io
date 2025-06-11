@@ -212,7 +212,7 @@ export function make_opus_index() {
   return src('src/opus/**/', { read: false })
     .pipe(through2.obj(async function (file, enc, cb) {
       const dirPath = file.path;
-      generateIndex(file.path);
+      generateIndex(dirPath);
       cb();
     }));
 }

@@ -26,14 +26,6 @@
   vertical-align: middle;
 }
 
-#loginedInfoBar,
-#needLoginInfoBar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.5em 1em;
-}
-
 .inputRow {
   padding: 0.75em 0;
 }

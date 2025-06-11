@@ -59,6 +59,32 @@ header a:visited {
   color: black;
 }
 
+#navLine {
+  float: left;
+}
+
+#profileLine {
+  float: right;
+  vertical-align: middle;
+  line-height: 3em;
+}
+
+#githubAnchor span {
+  vertical-align: middle;
+}
+
+#loginBar {
+  margin-left: 1em;
+  vertical-align: middle;
+}
+
+header::after {
+  content: "";
+  clear: both;
+  display: block;
+  height: 0;
+}
+
 #logo {
   color: green;
 }
