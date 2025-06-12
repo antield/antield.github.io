@@ -114,7 +114,8 @@ function injectOpusFolderContent(templateContent) {
       const displayClassName = " displayBlock";
       outputContent = outputContent.replace('@@articlesContentDisplayClass', displayClassName);
       const fileArrLiHtml = fileArr.map(function (item) {
-        return '<li><a href="' + item + '.html">' + item + '</a></li>';
+        const itemName = item.substring(0, item.lastIndexOf("."));
+        return '<li><a href="' + itemName + '.html">' + itemName + '</a></li>';
       })
       const fileArrUlHtml = '<ul class="article-list">\n' + fileArrLiHtml.join('') + '</ul>\n';
       outputContent = outputContent.replace('<!-- @@articlesContent -->', fileArrUlHtml);
