@@ -1,5 +1,46 @@
 {
     "order": 1,
-    "directories": [],
+    "directories": [
+        {
+            "name": "心理活动的生理基础",
+            "customPath": "心理活动的生理基础/",
+            "order": 2
+        },
+        {
+            "name": "思维语言及想象",
+            "customPath": "思维语言及想象/",
+            "order": 5
+        },
+        {
+            "name": "情绪、情感和意志",
+            "customPath": "情绪、情感和意志/",
+            "order": 8
+        },
+        {
+            "name": "意识与注意",
+            "customPath": "意识与注意/",
+            "order": 6
+        },
+        {
+            "name": "感觉、知觉",
+            "customPath": "感觉、知觉/",
+            "order": 3
+        },
+        {
+            "name": "绪论",
+            "customPath": "绪论/",
+            "order": 1
+        },
+        {
+            "name": "记忆",
+            "customPath": "记忆/",
+            "order": 4
+        },
+        {
+            "name": "需要与动机",
+            "customPath": "需要与动机/",
+            "order": 7
+        }
+    ],
     "files": []
 }

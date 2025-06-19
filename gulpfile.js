@@ -113,9 +113,11 @@ function injectOpusFolderContent(templateContent) {
     } else {
       const displayClassName = " displayBlock";
       outputContent = outputContent.replace('@@articlesContentDisplayClass', displayClassName);
+      fileArr.sort(function (a, b) {
+        return a.order - b.order;
+      });
       const fileArrLiHtml = fileArr.map(function (item) {
-        const itemName = item.substring(0, item.lastIndexOf("."));
-        return '<li><a href="' + itemName + '.html">' + itemName + '</a></li>';
+        return '<li><a href="' + item.customPath + '">' + item.name + '</a></li>';
       })
       const fileArrUlHtml = '<ul class="article-list">\n' + fileArrLiHtml.join('') + '</ul>\n';
       outputContent = outputContent.replace('<!-- @@articlesContent -->', fileArrUlHtml);
@@ -169,11 +171,30 @@ async function generateIndex(dirPath) {
         order,
       });
     } else if (item.isFile()) {
-      if (item.name == "index.json")
+      const itemName = item.name;
+      if (itemName == "index.json")
         continue;
 
-      files.push(item.name);
-
+      if (itemName.endsWith(".md")) {
+        const nameStem = itemName.substring(0, itemName.lastIndexOf("."));
+        if (/^\d+\..*\.md$/.test(nameStem)) {
+          const pos = nameStem.indexOf(".");
+          const order = parseInt(nameStem.substring(0, pos));
+          const name = nameStem.substring(pos + 1);
+          const fileObj = {
+            name,
+            order,
+            customPath: nameStem + ".html",
+          };
+          files.push(fileObj);
+        } else {
+          files.push({
+            name: nameStem,
+            customPath: nameStem + ".html",
+            order: 99999999,
+          });
+        }
+      }
     }
   }
 
