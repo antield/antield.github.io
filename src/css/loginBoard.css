@@ -42,13 +42,23 @@
 }
 
 .submitButton {
-  background-color: rgb(0, 160, 234);
+  background-color: #00a0ea;
   color: white;
   border-radius: 5px;
   border-width: 0;
   font-size: 14px;
   padding: 6px 32px;
   vertical-align: middle;
+  box-sizing: border-box;
+  width: 260px;
+  height: 36px;
+}
+
+.secondaryButton {
+  background-color: white;
+  color: #00a0ea;
+  border: 1px solid #00a0ea;
+  border-radius: 5px;
   box-sizing: border-box;
   width: 260px;
   height: 36px;
