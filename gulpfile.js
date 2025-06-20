@@ -49,7 +49,18 @@ function web_server() {
 
 function injectOpusFileContent(templateContent) {
   return through2.obj(async function (file, enc, cb) {
-    const outputContent = templateContent.replace('<!-- @@content -->', file.contents.toString());
+    let outputContent = templateContent;
+    const fileName = file.basename;
+    const nameStem = fileName.substring(0, fileName.lastIndexOf("."));
+    let title;
+    if (/^\d+\./.test(nameStem)) {
+      const pos = nameStem.indexOf(".");
+      title = nameStem.substring(pos + 1);
+    } else {
+      title = nameStem;
+    }
+    outputContent = templateContent.replaceAll('<!-- @@title -->', title);
+    outputContent = outputContent.replace('<!-- @@content -->', file.contents.toString());
     file.contents = Buffer.from(outputContent);
     file.extname = '.html';
     cb(null, file);
@@ -177,7 +188,7 @@ async function generateIndex(dirPath) {
 
       if (itemName.endsWith(".md")) {
         const nameStem = itemName.substring(0, itemName.lastIndexOf("."));
-        if (/^\d+\..*\.md$/.test(nameStem)) {
+        if (/^\d+\./.test(nameStem)) {
           const pos = nameStem.indexOf(".");
           const order = parseInt(nameStem.substring(0, pos));
           const name = nameStem.substring(pos + 1);
