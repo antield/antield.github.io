@@ -1,5 +1,46 @@
 {
     "order": 3,
-    "directories": [],
+    "directories": [
+        {
+            "name": "中年期的心理发展变化",
+            "customPath": "中年期的心理发展变化/",
+            "order": 7
+        },
+        {
+            "name": "婴儿期的心理发展",
+            "customPath": "婴儿期的心理发展/",
+            "order": 2
+        },
+        {
+            "name": "幼儿期的心理发展",
+            "customPath": "幼儿期的心理发展/",
+            "order": 3
+        },
+        {
+            "name": "概述",
+            "customPath": "概述/",
+            "order": 1
+        },
+        {
+            "name": "童年期的心理发展",
+            "customPath": "童年期的心理发展/",
+            "order": 4
+        },
+        {
+            "name": "老年期的心理发展变化",
+            "customPath": "老年期的心理发展变化/",
+            "order": 8
+        },
+        {
+            "name": "青年期的心理发展",
+            "customPath": "青年期的心理发展/",
+            "order": 6
+        },
+        {
+            "name": "青春发育期的心理发展",
+            "customPath": "青春发育期的心理发展/",
+            "order": 5
+        }
+    ],
     "files": []
 }

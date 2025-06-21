@@ -1,5 +1,46 @@
 {
     "order": 2,
-    "directories": [],
+    "directories": [
+        {
+            "name": "态度形成与态度转变",
+            "customPath": "态度形成与态度转变/",
+            "order": 5
+        },
+        {
+            "name": "概述",
+            "customPath": "概述/",
+            "order": 1
+        },
+        {
+            "name": "沟通与人际关系",
+            "customPath": "沟通与人际关系/",
+            "order": 6
+        },
+        {
+            "name": "爱情、婚姻与家庭",
+            "customPath": "爱情、婚姻与家庭/",
+            "order": 8
+        },
+        {
+            "name": "社会动机与社交情绪",
+            "customPath": "社会动机与社交情绪/",
+            "order": 4
+        },
+        {
+            "name": "社会化与自我概念",
+            "customPath": "社会化与自我概念/",
+            "order": 2
+        },
+        {
+            "name": "社会影响",
+            "customPath": "社会影响/",
+            "order": 7
+        },
+        {
+            "name": "社会知觉与归因",
+            "customPath": "社会知觉与归因/",
+            "order": 3
+        }
+    ],
     "files": []
 }

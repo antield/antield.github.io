@@ -1,5 +1,16 @@
 {
     "order": 4,
-    "directories": [],
+    "directories": [
+        {
+            "name": "初步诊断",
+            "customPath": "初步诊断/",
+            "order": 2
+        },
+        {
+            "name": "初诊接待与资料的搜集、整理",
+            "customPath": "初诊接待与资料的搜集、整理/",
+            "order": 1
+        }
+    ],
     "files": []
 }

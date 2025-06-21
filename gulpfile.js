@@ -13,6 +13,7 @@ import fs from 'fs/promises';
 import Webpack_Config_Prod from './webpack.prod.js';
 import Webpack_Config_Dev from './webpack.dev.js';
 import ghpages from 'gh-pages';
+import { log } from 'console';
 
 const pkg = {
   "name": "yunjiang.xin",
@@ -237,6 +238,7 @@ async function readOrCreateFile(filePath, defaultContent = '') {
       await fs.writeFile(filePath, defaultContent, 'utf8');
       return defaultContent;
     } else {
+      console.error('error: readOrCreateFile: ' + err.message);
       throw err;
     }
   }
@@ -246,7 +248,7 @@ export function make_opus_index() {
   return src('src/opus/**/', { read: false })
     .pipe(through2.obj(async function (file, enc, cb) {
       const dirPath = file.path;
-      generateIndex(dirPath);
+      await generateIndex(dirPath);
       cb();
     }));
 }
