@@ -79,8 +79,8 @@ async function copy_opus_article() {
       basepath: '@root'
     }))
     .on('error', function (err) {
-      console.error('Task:copy_opus_article: ', err.message);
-      this.end();
+      console.error('error: copy_opus_article: ' + err.message);
+      process.exit(1);
     })
     .pipe(dest(Dist));
 }
@@ -150,8 +150,8 @@ export async function copy_opus_folder_index() {
       basepath: '@root'
     }))
     .on('error', function (err) {
-      console.error('Task:copy_opus_folder_index: ', err.message);
-      this.end();
+      console.error('error: copy_opus_folder_index: ' + err.message);
+      process.exit(1);
     })
     .pipe(dest(Dist));
 }
@@ -171,6 +171,7 @@ async function generateIndex(dirPath) {
         subDirJson = JSON.parse(subJsonStr);
       } catch (e) {
         console.log("parse subDirJson error: " + e);
+        console.log(subDirJsonPath + ": " + subJsonStr);
         subDirJson = {};
       }
       const name = subDirJson.name || item.name;
@@ -258,8 +259,8 @@ function copy_html() {
       basepath: '@file'
     }))
     .on('error', function (err) {
-      console.error('Task:copy_html: ', err.message);
-      this.end();
+      console.error('error: copy_html: ' + err.message);
+      process.exit(1);
     })
     .pipe(dest(Dist));
 }
